@@ -4,7 +4,7 @@ import {
   GET_CATEGORY_SUCCESS,
 } from './constants';
 
-export const getCategory = (payload) => ({
+export const GetJoke = (payload) => ({
   type: GET_CATEGORY_BEGIN,
   payload,
 });
@@ -19,4 +19,4 @@ export const onError = (error) => ({
   payload: { error },
 });
 
-export default getCategory;
+export default GetJoke;

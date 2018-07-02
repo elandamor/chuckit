@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import GetCategories from '../GetCategories';
-import GetJoke from '../GetCategory';
+import GetJoke from '../GetJoke';
 
 import Wrapper from './styles';
 

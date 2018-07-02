@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import reducers from './reducers';
 import categoriesSaga from './containers/GetCategories/saga';
-import categorySaga from './containers/GetCategory/saga';
+import jokeSaga from './containers/GetJoke/saga';
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -14,6 +14,6 @@ const configureStore = createStore(
 );
 
 sagaMiddleware.run(categoriesSaga);
-sagaMiddleware.run(categorySaga);
+sagaMiddleware.run(jokeSaga);
 
 export default configureStore;

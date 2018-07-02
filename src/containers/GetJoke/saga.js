@@ -11,10 +11,10 @@ const handleFetch = ({ payload }) => { // eslint-disable-line arrow-body-style
   return fetch(`https://api.chucknorris.io/jokes/random?category=${payload}`)
     .then((response) => response.json())
     .then((category) => category)
-    .catch((error) => console.error(error));
-}
+    .catch((error) => console.error(error)); // eslint-disable-line no-console
+};
 
-function* getCategory(payload) {
+function* GetJoke(payload) {
   try {
     const category = yield call(handleFetch, payload);
     yield put(onSuccess(category));
@@ -23,8 +23,8 @@ function* getCategory(payload) {
   }
 }
 
-function* categorySaga() {
-  yield takeLatest(GET_CATEGORY_BEGIN, getCategory);
+function* jokeSaga() {
+  yield takeLatest(GET_CATEGORY_BEGIN, GetJoke);
 }
 
-export default categorySaga;
+export default jokeSaga;

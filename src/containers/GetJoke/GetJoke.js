@@ -2,16 +2,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import getCategory from './actions';
+import fetchJoke from './actions';
 
 import Wrapper from './styles';
 
 // eslint-disable-next-line react/prefer-stateless-function
-class GetCategory extends React.Component {
+class GetJoke extends React.Component {
   componentDidMount() {
     const { dispatch, match } = this.props;
 
-    dispatch(getCategory(match.params.category));
+    dispatch(fetchJoke(match.params.category));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -20,12 +20,12 @@ class GetCategory extends React.Component {
     const newCategory = nextProps.match.params.category;
 
     if (currentCategory !== newCategory) {
-      dispatch(getCategory(newCategory));
+      dispatch(fetchJoke(newCategory));
     }
   }
 
   render() {
-    const { category, error, loading } = this.props;
+    const { category, error, history, loading, match } = this.props;
 
     if (error) {
       return (
@@ -44,23 +44,45 @@ class GetCategory extends React.Component {
     }
 
     return (
-      <Wrapper className="c-categories">
-        {JSON.stringify(category)}
+      <Wrapper className="c-joke">
+        <header
+          className="c-header"
+        >
+          <button
+            className="c-btn c-btn--close"
+            type="button"
+            onClick={() => history.goBack()}
+          >
+            Back
+          </button>
+          <h1 className="a-title">
+            {match.params.category}
+          </h1>
+        </header>
+        <section
+          className="c-section"
+        >
+          <img src={category.icon_url} alt="Explicit icon" />
+          <blockquote>
+            {category.value}
+          </blockquote>
+        </section>
       </Wrapper>
     );
   }
 }
 
-GetCategory.defaultProps = {
+GetJoke.defaultProps = {
   category: {},
   error: null,
   loading: true,
 };
 
-GetCategory.propTypes = {
+GetJoke.propTypes = {
   category: PropTypes.object,
   dispatch: PropTypes.func.isRequired,
   error: PropTypes.object,
+  history: PropTypes.object.isRequired,
   loading: PropTypes.bool,
   match: PropTypes.object.isRequired,
 };
@@ -77,4 +99,4 @@ const mapStateToProps = ({
   loading,
 });
 
-export default connect(mapStateToProps)(GetCategory);
+export default connect(mapStateToProps)(GetJoke);
